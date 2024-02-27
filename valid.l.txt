@@ -1,0 +1,20 @@
+%{
+#include <stdio.h>
+#include <string.h>
+%}
+
+DIGIT       [0-9]
+LETTER      [a-zA-Z]
+URL         (http|https):\/\/{LETTER}({LETTER}|{DIGIT})*(\.{LETTER}({LETTER}|{DIGIT})*)*(\/{LETTER}({LETTER}|{DIGIT})*)*
+
+%%
+
+{URL}   printf("Valid URL: %s\n", yytext);
+.       printf("Invalid URL: %s\n", yytext);
+
+%%
+
+int main() {
+    yylex();
+    return 0;
+}

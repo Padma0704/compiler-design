@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+int num_chars = 0;
+int num_lines = 0;
+int num_words = 0;
+%}
+
+%%
+\n  { num_chars++; num_lines++; } // Newline encountered
+.    { num_chars++; }               // Any other character
+
+// Counting words
+word [^ \t\n]+ { num_words++; }
+
+%%
+
+int yywrap() {
+    return 1; // Indicate end of input
+}
