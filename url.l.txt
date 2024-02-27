@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+
+^((https?|ftp):\/\/)?([\w-]+(\.[\w-]+)+)([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?  printf("Valid URL: %s\n", yytext);
+.                                                                                   printf("Invalid URL: %s\n", yytext);
+
+%%
+
+int yywrap() {
+    return 1;
+}
+
+int main() {
+    yylex();
+    return 0;
+}
